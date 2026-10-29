@@ -10,11 +10,11 @@
 | Location | MUNICIPIUL BUCUREŞTI, SECTOR 1, CALEA GRIVITEI, NR.143 |
 | Website | [https://continentalhotels.ro](https://continentalhotels.ro) |
 | Careers | [https://www.jobs-continentalhotels.ro](https://www.jobs-continentalhotels.ro) |
-| Last Scraped | 2026-10-28 |
+| Last Scraped | 2026-10-29 |
 
 ## Current Job Listings (8)
 
-_Generated: 2026-10-28T12:05:10.502Z_
+_Generated: 2026-10-29T12:16:31.432Z_
 
 ### Ajutor Bucătar
 
