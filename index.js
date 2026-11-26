@@ -155,8 +155,22 @@ function parseHtmlJobs(html) {
  */
 async function scrapeAllListings(_testOnlyOnePage = false) {
   console.log(`POST ${JOB_ENDPOINT}`);
-  const html = await fetchJobsHtml();
-  const { jobs, total } = parseHtmlJobs(html);
+  // The endpoint sometimes answers a runner with an empty fragment (HTTP 200 / transient error).
+  // Retry before concluding there are no jobs, and log what came back.
+  let jobs = [];
+  let total = 0;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const html = await fetchJobsHtml();
+      ({ jobs, total } = parseHtmlJobs(html));
+      if (jobs.length > 0) break;
+      console.log(`  Attempt ${attempt}/3 returned no jobs (${html.length} bytes)`);
+    } catch (err) {
+      console.log(`  Attempt ${attempt}/3 failed: ${err.message}`);
+      if (attempt === 3) throw err;
+    }
+    if (attempt < 3) await sleep(attempt * 5000);
+  }
   console.log(`Found ${total} jobs`);
 
   const seen = new Set();
